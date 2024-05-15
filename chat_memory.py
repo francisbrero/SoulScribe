@@ -34,13 +34,15 @@ instructions = """You are Karl, a mental health chatbot.
 teachable_agent = ConversableAgent(
     name="Karl",  # The name can be anything.
     llm_config=llm_config,
-    system_message=instructions,
+    # system_message=instructions,
 )
 
 # Instantiate a Teachability object. Its parameters are all optional.
 teachability = Teachability(
     reset_db=False,  # Use True to force-reset the memo DB, and False to use an existing DB.
-    path_to_db_dir="./data/memory/teachability_db" 
+    path_to_db_dir="./data/memory/teachability_db",
+    verbosity=3,  # 0 (default) for basic info, 1 to add memory operations, 2 for analyzer messages, 3 for memo lists.
+    recall_threshold=0.5,  # The maximum distance for retrieved memos, where 0.0 is exact match. Default 1.5. Larger values allow more (but less relevant) memos to be recalled.
 )
 
 # Now add teachability to the agent.
